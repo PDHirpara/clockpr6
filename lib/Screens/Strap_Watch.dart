@@ -98,7 +98,7 @@ class _Strap_WatchState extends State<Strap_Watch> {
               child: CircularProgressIndicator(
                 strokeWidth: 5,
                 color: Colors.greenAccent,
-                value: m / 60,
+                value: DateTime.now().minute / 60,
               ),
             ),
             Transform.scale(

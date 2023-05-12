@@ -11,38 +11,39 @@ class Analog_Watch extends StatefulWidget {
 }
 
 class _Analog_WatchState extends State<Analog_Watch> {
+  List<String> day = [
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "SUNDAY",
+  ];
+  List<String> month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   String a = '';
-  void DayName() {
-    switch (d) {
-      case 1:
-        a = "MON";
-        break;
-      case 2:
-        a = "TUE";
-        break;
-      case 3:
-        a = "WED";
-        break;
-      case 4:
-        a = "THU";
-        break;
-      case 5:
-        a = "FRI";
-        break;
-      case 6:
-        a = "SAT";
-        break;
-      case 7:
-        a = "SAN";
-        break;
-    }
-  }
-
+  String p = 'AM';
+  String q = 'PM';
+  String r = '';
   int s = 0;
   int m = 0;
   int h = 0;
   int d = 0;
   int mm = 0;
+  int w = 0;
   myClock() {
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
@@ -51,6 +52,10 @@ class _Analog_WatchState extends State<Analog_Watch> {
         h = DateTime.now().hour;
         d = DateTime.now().day;
         mm = DateTime.now().month;
+        w = DateTime.now().weekday;
+        if (h > 12) {
+          h -= 12;
+        }
       });
       myClock();
     });
@@ -113,165 +118,293 @@ class _Analog_WatchState extends State<Analog_Watch> {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Stack(
-          children: [
-            // Center(
-            //   child: Container(
-            //     height: 100,
-            //     width: 100,
-            //     decoration: BoxDecoration(
-            //       color: Colors.blue,
-            //       borderRadius: BorderRadius.circular(100),
-            //     ),
-            //   ),
-            // ),
-            ...List.generate(
-              60,
-              (index) => Transform.rotate(
-                  angle: (index / 60) * (2 * pi),
-                  child: Stack(
+      body: Column(
+        children: [
+          Center(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second} ${(DateTime.now().hour >= 12) ? q : p}",
+                  style: const TextStyle(
+                    fontSize: 50,
+                  ),
+                ),
+                Text(
+                  "${DateTime.now().day}-${month[mm - 1]}-${DateTime.now().year}",
+                  style: const TextStyle(
+                    fontSize: 50,
+                  ),
+                ),
+                Text(
+                  "${day[w - 1]}",
+                  style: const TextStyle(
+                    fontSize: 50,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 100,
+          ),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              // ...List.generate(
+              //   60,
+              //   (index) => Transform.rotate(
+              //     angle: (index / 60) * (2 * pi),
+              //     child: Stack(
+              //       children: [
+              //         Divider(
+              //           thickness: (index % 5 == 0)
+              //               ? (index % 15 == 0)
+              //                   ? 12
+              //                   : 7
+              //               : 2,
+              //           endIndent: MediaQuery.of(context).size.width * 0.90,
+              //           color:
+              //               (index % 15 == 0) ? Colors.blueAccent : Colors.grey,
+              //         ),
+              // Transform.rotate(
+              //   angle: (pi * 2),
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(left: 10),
+              //     child: Transform.scale(
+              //       scale: 2,
+              //       child: Text(
+              //         (index == 0) ? "9" : "",
+              //         style: const TextStyle(
+              //           // fontSize: 20,
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.white,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Transform.rotate(
+              //   angle: (3 * pi / 2),
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(top: 10),
+              //     child: Transform.scale(
+              //       scale: 2,
+              //       child: Text(
+              //         (index == 15) ? "12" : "",
+              //         style: const TextStyle(
+              //           // fontSize: 20,
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.white,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Transform.rotate(
+              //   angle: (pi),
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(right: 10),
+              //     child: Transform.scale(
+              //       scale: 2,
+              //       child: Text(
+              //         (index == 30) ? "3" : "",
+              //         style: const TextStyle(
+              //           // fontSize: 20,
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.white,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Transform.rotate(
+              //   angle: (pi / 2),
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(bottom: 10),
+              //     child: Transform.scale(
+              //       scale: 2,
+              //       child: Text(
+              //         (index == 45) ? "6" : "",
+              //         style: const TextStyle(
+              //           // fontSize: 20,
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.white,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+              Center(
+                child: Container(
+                  height: 430,
+                  width: 400,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(800),
+                  ),
+                  child: Center(
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Container(
+                            height: 300,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(800),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 183),
+                          child: Column(
+                            children: const [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "12",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 300,
+                              ),
+                              Text(
+                                "6",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 200),
+                          child: Row(
+                            children: const [
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                "9",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 330,
+                              ),
+                              Text(
+                                "3",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Transform.rotate(
+                angle: (pi / 2),
+                child: Transform.rotate(
+                  angle: (pi * 2) * (s / 60),
+                  child: Row(
                     children: [
+                      Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.orange,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                       Divider(
-                        thickness: (index % 5 == 0)
-                            ? (index % 15 == 0)
-                                ? 12
-                                : 7
-                            : 2,
-                        endIndent: MediaQuery.of(context).size.width * 0.90,
-                        color: (index % 15 == 0) ? Colors.red : Colors.grey,
-                      ),
-                      Transform.rotate(
-                        angle: (pi * 2),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Transform.scale(
-                            scale: 2,
-                            child: Text(
-                              (index == 0) ? "9" : "",
-                              style: const TextStyle(
-                                // fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Transform.rotate(
-                        angle: (3 * pi / 2),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Transform.scale(
-                            scale: 2,
-                            child: Text(
-                              (index == 15) ? "12" : "",
-                              style: const TextStyle(
-                                // fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Transform.rotate(
-                        angle: (pi),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: Transform.scale(
-                            scale: 2,
-                            child: Text(
-                              (index == 30) ? "3" : "",
-                              style: const TextStyle(
-                                // fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Transform.rotate(
-                        angle: (pi / 2),
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Transform.scale(
-                            scale: 2,
-                            child: Text(
-                              (index == 45) ? "6" : "",
-                              style: const TextStyle(
-                                // fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        color: Colors.orange,
+                        thickness: 2,
+                        endIndent: MediaQuery.of(context).size.width * 0.2,
+                        indent: MediaQuery.of(context).size.width * 0.2,
                       ),
                     ],
-                  )),
-            ),
-            Transform.rotate(
-              angle: (3 * pi / 2),
-              child: Transform.rotate(
-                angle: (pi * 2) * (s / 60),
-                child: Divider(
-                  color: Colors.orange,
-                  thickness: 2,
-                  // endIndent: MediaQuery.of(context).size.width*0.5,
-                  indent: MediaQuery.of(context).size.width * 0.5,
+                  ),
                 ),
               ),
-            ),
-            Transform.rotate(
-              angle: (3 * pi / 2),
-              child: Transform.rotate(
-                angle: (pi * 2) * (m / 60),
-                child: const Divider(
-                  color: Colors.white,
-                  thickness: 4,
-                  endIndent: 80,
-                  indent: 200,
+              Transform.scale(
+                scale: 6,
+                child: CircularProgressIndicator(
+                  strokeWidth: 5,
+                  color: Colors.greenAccent,
+                  value: DateTime.now().minute / 60,
                 ),
               ),
-            ),
-            Transform.rotate(
-              angle: (3 * pi / 2),
-              child: Transform.rotate(
-                angle: (pi * 2) * (h / 12),
-                child: const Divider(
-                  color: Colors.white,
-                  thickness: 6,
-                  endIndent: 110,
-                  indent: 200,
+              // Transform.rotate(
+              //   angle: (3 * pi / 2),
+              //   child: Transform.rotate(
+              //     angle: (pi * 2) * (m / 60),
+              //     child: const Divider(
+              //       color: Colors.white,
+              //       thickness: 4,
+              //       endIndent: 80,
+              //       indent: 200,
+              //     ),
+              //   ),
+              // ),
+              Transform.rotate(
+                angle: (3 * pi / 2),
+                child: Transform.rotate(
+                  angle: (pi * 2) * (h / 12),
+                  child: const Divider(
+                    color: Colors.white,
+                    thickness: 6,
+                    endIndent: 110,
+                    indent: 200,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 50),
-              child: Text(
-                "$d/$mm",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 100),
-              child: Text(
-                a,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Colors.white,
-                ),
-              ),
-            )
-          ],
-        ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 50),
+              //   child: Text(
+              //     "$d/$mm",
+              //     style: const TextStyle(
+              //       color: Colors.white,
+              //       fontWeight: FontWeight.bold,
+              //       fontSize: 30,
+              //     ),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 100),
+              //   child: Text(
+              //     a,
+              //     style: const TextStyle(
+              //       fontWeight: FontWeight.bold,
+              //       fontSize: 30,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // )
+            ],
+          ),
+        ],
       ),
     );
   }
