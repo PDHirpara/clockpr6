@@ -1,16 +1,2 @@
-# clockpr6
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="340" alt="Screenshot 2023-05-16 at 10 03 00" src="https://github.com/PDHirpara/clockpr6/assets/92213446/c09a897e-b66e-4b5d-b5f5-48b1aafd5d54">
+<img width="343" alt="Screenshot 2023-05-16 at 10 03 21" src="https://github.com/PDHirpara/clockpr6/assets/92213446/7120eb61-e47e-4d40-95b6-4655189feb59">
